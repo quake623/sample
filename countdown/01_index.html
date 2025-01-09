@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>타이머 01</title>
+  <style type="text/css">
+    .new_evt_wrap {
+      position: relative;
+      width: 1080px;
+      margin: 0 auto;
+    }
+  
+    .new_evt_wrap .event_detail {
+      position: relative;
+    }
+  
+    /* 타이머 */
+    .timerWrap {
+      position: absolute;
+      left: 50%;
+      bottom: 17.3%;
+      text-align: center;
+      margin-top: 36px;
+      transform: translate(-50%);
+      width: 63%;
+      height: 91px;
+    }
+  
+    .timerWrap>div {
+      display: flex;
+      position: absolute;
+      width: 12.383747%;
+      top: 0%;
+    }
+  
+    .timerWrap>div span {
+      display: inline-block;
+      width: 100%;
+      font-size: 75px;
+      color: #000;
+      font-weight: 900;
+    }
+  
+    .timerWrap .day {
+      left: 1.5%;
+    }
+  
+    .timerWrap .hour {
+      left: 29.8%;
+    }
+  
+    .timerWrap .min {
+      right: 29.5%;
+    }
+  
+    .timerWrap .sec {
+      right: 1.6%;
+    }
+  
+    /* 날짜 */
+    .date-text {
+      position: absolute;
+      width: 100%;
+      bottom: 24%;
+      font-weight: 900;
+      font-size: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      letter-spacing: -1.5px;
+    }
+  
+    .date-text .date-emp {
+      font-size: 23px;
+      font-weight: 400;
+      margin-right: 8px;
+      padding: 0 18px;
+      border: 2px solid #000;
+      border-radius: 30px;
+      line-height: 46px;
+    }
+  </style>
+
+  <div class="new_evt_wrap">
+    <div class="event_detail">
+      <img src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20240116-020423-197-CBSBaMh1.png" alt="하단 참조" />
+
+      <div class="date-text">
+        <span class="date-emp">할인 혜택 마감</span>
+        <span>1월 19일~1월 31일</span>
+      </div>
+
+      <!-- 남은시간 countdown -->
+      <div class="timerWrap">
+        <div class="day">
+          <span id="d1">0</span>
+          <span id="d0">0</span>
+        </div>
+        <div class="hour">
+          <span id="h1">0</span>
+          <span id="h0">0</span>
+        </div>
+        <div class="min">
+          <span id="m1">0</span>
+          <span id="m0">0</span>
+        </div>
+        <div class="sec">
+          <span id="s1">0</span>
+          <span id="s0">0</span>
+        </div>
+      </div>
+      <!-- //남은시간 countdown -->
+    </div>
+  </div>
+
+  <script>
+    var timerWrapElements = document.getElementsByClassName("timerWrap");
+    for (var i = 0; i < timerWrapElements.length; i++) {
+      timerWrapElements[i].style.display = "none";
+    }
+
+    function counter() {
+      var dday = new Date("Jan 31, 2025, 23:59:59").getTime();
+      var timer = setInterval(function () {
+        var now = new Date();
+        var distance = dday - now;
+        var d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var s = Math.floor((distance % (1000 * 60)) / 1000);
+        var s1 = [];
+        var m1 = [];
+        var h1 = [];
+        var d1 = [];
+
+        if (distance < 1000) {
+          clearInterval(timer);
+          //document.getElementById("s0").classList.add("num0");
+          document.getElementById("s0").textContent = "0";
+        } else {
+          if (s < 10) {
+            s1[0] = 0;
+            s1[1] = s;
+          } else {
+            s1 = String(s).split("");
+          }
+          if (m < 10) {
+            m1[0] = 0;
+            m1[1] = m;
+          } else {
+            m1 = String(m).split("");
+          }
+          if (h < 10) {
+            h1[0] = 0;
+            h1[1] = h;
+          } else {
+            h1 = String(h).split("");
+          }
+          if (d < 10) {
+            d1[0] = 0;
+            d1[1] = d;
+          } else {
+            d1 = String(d).split("");
+          }
+
+          for (var i = 0; i < timerWrapElements.length; i++) {
+            timerWrapElements[i].style.display = "block";
+          }
+
+          document.getElementById("s1").innerHTML = s1[0];
+          document.getElementById("s0").innerHTML = s1[1];
+          document.getElementById("m1").innerHTML = m1[0];
+          document.getElementById("m0").innerHTML = m1[1];
+          document.getElementById("h1").innerHTML = h1[0];
+          document.getElementById("h0").innerHTML = h1[1];
+          document.getElementById("d1").innerHTML = d1[0];
+          document.getElementById("d0").innerHTML = d1[1];
+
+          document.getElementById("s1").classList.remove("class");
+          document.getElementById("s0").classList.remove("class");
+          document.getElementById("m1").classList.remove("class");
+          document.getElementById("m0").classList.remove("class");
+          document.getElementById("h1").classList.remove("class");
+          document.getElementById("h0").classList.remove("class");
+          document.getElementById("d1").classList.remove("class");
+          document.getElementById("d0").classList.remove("class");
+
+          document.getElementById("s1").classList.add("num" + s1[0]);
+          document.getElementById("s0").classList.add("num" + s1[1]);
+          document.getElementById("m1").classList.add("num" + m1[0]);
+          document.getElementById("m0").classList.add("num" + m1[1]);
+          document.getElementById("h1").classList.add("num" + h1[0]);
+          document.getElementById("h0").classList.add("num" + h1[1]);
+          document.getElementById("d1").classList.add("num" + d1[0]);
+          document.getElementById("d0").classList.add("num" + d1[1]);
+        }
+      }, 1000);
+    }
+    counter();
+
+    document.addEventListener("DOMContentLoaded", function () {
+      window.scrollTo(0, 0);
+    });
+  </script>
+</body>
+</html>

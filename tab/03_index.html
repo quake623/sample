@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>탭 03</title>
+  <style>
+    .new_evt_wrap {width: 1080px;}
+    .section {position: relative;}
+    .tabs_detail_a {position: absolute; background: transparent; border: 0;}
+  </style>
+</head>
+<body>
+  <div class="new_evt_wrap">
+    <div class="section">
+      <div class="tabs_conts_wrap">
+        <!-- 1번탭 위치 -->
+        <button class="tabs_detail_a" data-idx="1" aria-controls="tab001" onclick="tabsClick(this)" style="width: 340px; height: 60px; top: 257px; left: 200px"></button>
+        <!-- 2번탭 위치 -->
+        <button class="tabs_detail_a" data-idx="2" aria-controls="tab002" onclick="tabsClick(this)" style="width: 340px; height: 60px; top: 257px; right: 200px"></button>
+
+        <div id="tabs001" class="tabs_conts" aria-labelledby="tabs001" role="tabpanel">
+          <img
+            src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20240731-060210-775-9vScIC8g.png"
+            alt=""
+          />
+        </div>
+
+        <div id="tabs002" class="tabs_conts" aria-labelledby="tabs002" role="tabpanel" style="display: none">
+          <img
+            src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20240709-065554-894-n6mJm1T1.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function (window) {
+      function tabsClick(target) {
+        var parent = target.closest(".tabs_conts_wrap");
+        var tabsBtns = parent.querySelectorAll(".tabs_detail_a");
+        var tabsConts = parent.querySelectorAll(".tabs_conts");
+        var on = "on";
+        var content = target.nextElementSibling;
+        var targetIdx = target.getAttribute("data-idx") - 1;
+
+        tabsBtns.forEach(function (tabsBtn, idx) {
+          if (targetIdx === idx) {
+            target.classList.add(on);
+            target.setAttribute("aria-selected", true);
+          } else {
+            tabsBtn.classList.remove(on);
+            tabsBtn.setAttribute("aria-selected", false);
+          }
+        });
+
+        tabsConts.forEach(function (tabsCont, idx) {
+          if (targetIdx === idx) {
+            tabsCont.classList.add(on);
+            tabsCont.style.display = "block";
+          } else {
+            tabsCont.classList.remove(on);
+            tabsCont.style.display = "none";
+          }
+        });
+      }
+      window.tabsClick = tabsClick;
+    })(window);
+  </script>
+</body>
+</html>

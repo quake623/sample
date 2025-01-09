@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide_01</title>
+  <style>
+    .slider {
+      width: 300px;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+    }
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .control {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="slider">
+    <div class="slides">
+      <img src="https://via.placeholder.com/300x200/FF0000/FFFFFF?text=Slide1" alt="Slide 1" class="slide">
+      <img src="https://via.placeholder.com/300x200/00FF00/FFFFFF?text=Slide2" alt="Slide 2" class="slide">
+      <img src="https://via.placeholder.com/300x200/0000FF/FFFFFF?text=Slide3" alt="Slide 3" class="slide">
+    </div>
+    <div class="controls">
+      <button class="control prev">◀</button>
+      <button class="control next">▶</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const slides = document.querySelector(".slides");
+      const slide = document.querySelectorAll(".slide");
+      const prevBtn = document.querySelector(".prev");
+      const nextBtn = document.querySelector(".next");
+
+      let currentIndex = 0;
+      const totalSlides = slide.length;
+
+      function updateSlidePosition() {
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+
+      function showNextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlidePosition();
+      }
+
+      function showPrevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlidePosition();
+      }
+
+      nextBtn.addEventListener("click", showNextSlide);
+      prevBtn.addEventListener("click", showPrevSlide);
+
+      // 자동 슬라이드 기능 (선택 사항)
+      setInterval(showNextSlide, 3000); // 3초마다 다음 슬라이드로 이동
+    });
+  </script>
+</body>
+</html>
