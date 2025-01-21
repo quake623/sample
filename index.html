@@ -13,18 +13,109 @@
   
     body {
       margin: 0;
-      line-height: 1.5;
+      line-height: 1.8;
+    }
+  
+    ul li {
+      list-style: none;
+    }
+  
+    a {
+      color: inherit;
+      vertical-align: middle;
+      /* text-decoration: none; */
+    }
+  
+    .inner {
+      width: 1440px;
+      margin: 0 auto;
+    }
+  
+    .main>li {
+      position: relative;
+      padding-left: 25px;
+      counter-increment: startNumber;
+    }
+  
+    .main>li:before {
+      position: absolute;
+      left: 0;
+      top: 3px;
+      content: counter(startNumber);
+      font-size: 12px;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border: 1px solid #666;
+    }
+  
+    .sub li {
+      position: relative;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <ol>
-    <li>탭</li>
-    <li>슬라이드</li>
-    <li>구구단</li>
-    <li>카운트다운</li>
-    <li>룰렛</li>
-  </ol>
+  <div class="content">
+    <div class="inner">
+      <ul class="main">
+        <li>탭
+          <ul class="sub">
+            <li>
+              <a href="/tab/01_index.html">1번</a>
+            </li>
+            <li>
+              <a href="/tab/02_index.html">2번</a>
+            </li>
+            <li>
+              <a href="/tab/03_index.html">3번</a>
+            </li>
+          </ul>
+        </li>
+        <li>슬라이드
+          <ul class="sub">
+            <li>
+              <a href="/slide/01_index.html">1번</a>
+            </li>
+            <li>
+              <a href="/slide/02_index.html">2번</a>
+            </li>
+          </ul>
+        </li>
+        <li>구구단
+          <ul class="sub">
+            <li>
+              <a href="/multiplication table/01_index.html">1번</a>
+            </li>
+          </ul>
+        </li>
+        <li>카운트다운
+          <ul class="sub">
+            <li>
+              <a href="/countdown/01_index.html">1번</a>
+            </li>
+            <li>
+              <a href="/countdown/02_index.html">2번</a>
+            </li>
+          </ul>
+        </li>
+        <li>룰렛
+          <ul class="sub">
+            <li>
+              <a href="/roulette/01_index.html">1번</a>
+            </li>
+            <li>
+              <a href="/roulette/02_index.html">2번</a>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
 
   <script>
 
