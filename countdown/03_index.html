@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>타이머 02</title>
+  <title>타이머 03</title>
   <style>
     .timerWrap {
       position: absolute;
-      top: 680px;
+      top: 160px;
       width: 100%;
       font-size: 0;
       text-align: center;
@@ -16,24 +16,20 @@
     .timerWrap > div {
       display: inline-block;
     }
-
+  
     .timerWrap > div + div {
-      margin-left: 60px;
-    }
-
-    .timerWrap .sec {
-      display: none;
-    }
-
-    .timerWrap > div span {
-      font-size: 32px;
-      color: #fff;
-      font-weight: 700;
+      margin-left: 48px;
     }
   
-    .timerWrap > div span.kr {
-      letter-spacing: -1px;
-      margin-left: 2px;
+    .timerWrap .kr, .timerWrap .sec {
+      display: none;
+    }
+  
+    .timerWrap > div span {
+      font-family: 'Pretendard';
+      font-size: 78px;
+      color: #0d9946;
+      font-weight: 800;
     }
   </style>
 </head>
@@ -41,7 +37,7 @@
   <div style="width: 1080px; margin: 0px auto">
     <div class="event_detail" style="position: relative">
       <img
-        src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20240731-023048-498-ciKjft0x.png"
+        src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250304-092431-662-Rxi0JYDE.png"
         alt="하단 내용 참조"
       />
       <div class="timerWrap">
@@ -50,19 +46,19 @@
           <span id="d0">0</span>
           <span class="kr">일</span>
         </div>
-
+      
         <div class="hour">
           <span id="h1">0</span>
           <span id="h0">0</span>
           <span class="kr">시간</span>
         </div>
-
+      
         <div class="min">
           <span id="m1">0</span>
           <span id="m0">0</span>
           <span class="kr">분</span>
         </div>
-
+  
         <div class="sec">
           <span id="s1">0</span>
           <span id="s0">0</span>
@@ -72,7 +68,7 @@
     </div>
   </div>
   <script>
-    (function (window) {
+    ((window) => {
       // 카운터
       const timerWrapElements = document.getElementsByClassName("timerWrap");
       for (var i = 0; i < timerWrapElements.length; i++) {
