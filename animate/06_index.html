@@ -1,0 +1,29 @@
+<style>
+  @keyframes puddingStretch {
+    0% { transform: scaleX(1) scaleY(1); }
+    20% { transform: scaleX(1.2) scaleY(0.8); } /* 좌우로 늘어나면서 위아래 찌그러짐 */
+    40% { transform: scaleX(0.8) scaleY(1.2); } /* 위아래로 늘어나면서 좌우 찌그러짐 */
+    60% { transform: scaleX(1.1) scaleY(0.9); } /* 가볍게 반동 */
+    80% { transform: scaleX(0.9) scaleY(1.1); } /* 반대 방향으로 작은 반동 */
+    100% { transform: scaleX(1) scaleY(1); } /* 원래 크기로 복귀 */
+  }
+  
+  .pudding {
+    margin: 100px;
+    width: 120px;
+    height: 100px;
+    background: #fdd835;
+    border-radius: 50px 50px 20px 20px; /* 푸딩 윗부분 둥글게 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    animation: puddingStretch 1.5s infinite cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+</style>
+<body>
+  <div>
+    <span class="pudding"></span>
+  </div>
+</body>

@@ -1,0 +1,23 @@
+<style>
+  @keyframes lateMoveDown {
+    0% { transform: translateY(0) rotate(5deg); }
+    45% { transform: translateY(0) rotate(5deg); } /* 처음엔 그대로 */
+    65% { transform: translateX(-15px) translateY(15px) rotate(15deg); } /* 갑자기 아래로 이동 */
+    100% { transform: translateY(0) rotate(5deg); } /* 다시 원래 위치 */
+  }
+  
+  .box {
+    margin: 100px;
+    width: 100px;
+    height: 100px;
+    background: coral;
+    display: inline-block;
+    transition: transform 0.1s ease-in-out;
+    animation: lateMoveDown 2s infinite ease-in-out;
+  }
+</style>
+<body>
+  <div>
+    <span class="box"></span>
+  </div>
+</body>

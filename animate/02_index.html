@@ -1,0 +1,24 @@
+<style>
+  @keyframes swing {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg); } /* 오른쪽으로 회전 */
+    50% { transform: rotate(-15deg); } /* 왼쪽으로 회전 */
+    75% { transform: rotate(10deg); } /* 다시 오른쪽 */
+    100% { transform: rotate(0deg); } /* 원래 위치 */
+  }
+  
+  .box {
+    margin: 100px;
+    width: 100px;
+    height: 100px;
+    background: coral;
+    display: inline-block;
+    transition: transform 0.1s ease-in-out;
+    animation: swing 2s infinite ease-in-out;
+  }
+</style>
+<body>
+  <div>
+    <span class="box"></span>
+  </div>
+</body>

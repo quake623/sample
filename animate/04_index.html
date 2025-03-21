@@ -1,0 +1,28 @@
+<style>
+  @keyframes cakeBounce {
+    0% { transform: scale(1) translateY(0) rotate(0deg); }
+    30% { transform: scale(1.05, 0.95) translateY(-5px) rotate(1deg); } /* 위로 튕기면서 살짝 회전 */
+    50% { transform: scale(0.95, 1.05) translateY(3px) rotate(-1deg); } /* 아래로 눌림 */
+    70% { transform: scale(1.02, 0.98) translateY(-2px) rotate(0.5deg); } /* 다시 올라감 */
+    100% { transform: scale(1) translateY(0) rotate(0deg); } /* 원래 상태로 복귀 */
+  }
+  
+  .cake {
+    margin: 100px;
+    width: 120px;
+    height: 100px;
+    background: pink;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    animation: cakeBounce 1.5s infinite ease-in-out;
+  }
+</style>
+<body>
+  <div>
+    <span class="cake"></span>
+  </div>
+</body>

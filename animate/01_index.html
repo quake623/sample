@@ -1,0 +1,22 @@
+<style>
+  @keyframes slowRotateFastReset {
+    0% { transform: rotate(20deg); }
+    70% { transform: scale(1.2) rotate(40deg); } /* 천천히 회전 */
+    100% { transform: rotate(20deg); } /* 원래 위치로 빠르게 복귀 */
+  }
+  
+  .box {
+    margin: 100px;
+    width: 100px;
+    height: 100px;
+    background: coral;
+    display: inline-block;
+    transition: transform 0.1s ease-in-out;
+    animation: slowRotateFastReset 2s infinite ease-in-out;
+  }
+</style>
+<body>
+  <div>
+    <span class="box"></span>
+  </div>
+</body>
