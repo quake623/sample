@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tab_04</title>
+  <style>
+    button {
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+      background: transparent;
+    }
+    img {
+      vertical-align: middle;
+    }
+    .event_detail {
+      position: relative;
+    }
+
+    .tab_wrapper .tab_btn {
+      position: absolute;
+      display: block;
+      top: 332px;
+      z-index: 1;
+      width: 143px;
+      height: 143px;
+      border-radius: 100%;
+    }
+    .tab_prev, .tab_next {
+      position: absolute;
+      display: block;
+      width: 104px;
+      height: 104px;
+      bottom: 543px;
+      z-index: 1;
+    }
+    .tab_prev {
+      left: 98px;
+      background: url("https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250310-095240-327-MKQTy7YE.png") no-repeat center;
+    }
+    .tab_next {
+      right: 98px;
+      background: url("https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250310-095245-633-May81TL7.png") no-repeat center;
+    }
+    .tab_wrapper .tab_cont {
+      position: absolute;
+      bottom: 67px;
+    }
+  </style>
+</head>
+<body>
+  <div style="width: 1080px; margin: 0px auto">
+    <div class="event_detail conts tab_wrapper">
+      <img
+        src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250227-103007-508-T0djUeor.png"
+        alt=""
+      />
+      <!-- 1번탭 메뉴 -->
+      <button
+        class="tab_btn"
+        style="left: 258px"
+        data-idx="1"
+        aria-controls="tab001"
+        onclick="tabsClick(this)"
+      ></button>
+      <!-- 2번탭 메뉴 -->
+      <button
+        class="tab_btn"
+        style="left: 470px"
+        data-idx="2"
+        aria-controls="tab002"
+        onclick="tabsClick(this)"
+      ></button>
+      <!-- 3번탭 메뉴 -->
+      <button
+        class="tab_btn"
+        style="right: 257px"
+        data-idx="3"
+        aria-controls="tab003"
+        onclick="tabsClick(this)"
+      ></button>
+      <button class="tab_prev" onclick="changeTab(this)"></button>
+      <button class="tab_next" onclick="changeTab(this)"></button>
+  
+      <div
+        id="tabs001"
+        class="tab_cont"
+        aria-labelledby="tabs001"
+        role="tabpanel"
+      >
+        <!-- 1번탭 -->
+        <img
+          src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250228-042423-016-hBT3BX9u.png"
+          alt="(하단 내용 참조)"
+        />
+      </div>
+      <div
+        id="tabs002"
+        class="tab_cont"
+        aria-labelledby="tabs002"
+        role="tabpanel"
+        style="display: none"
+      >
+        <!-- 2번탭 -->
+        <img
+          src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250228-042430-643-Ye4iW80m.png"
+          alt="(하단 내용 참조)"
+        />
+      </div>
+      <div
+        id="tabs003"
+        class="tab_cont"
+        aria-labelledby="tabs003"
+        role="tabpane3"
+        style="display: none"
+      >
+        <!-- 3번탭 -->
+        <img
+          src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250228-042436-887-vu0FFBZa.png"
+          alt="(하단 내용 참조)"
+        />
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // 탭
+    function tabsClick(target) {
+      var parent = target.closest(".tab_wrapper");
+      var tabsBtns = parent.querySelectorAll(".tab_btn");
+      var tabsConts = parent.querySelectorAll(".tab_cont");
+      var targetIdx = target.getAttribute("data-idx") - 1;
+
+      tabsBtns.forEach(function (tabsBtn, idx) {
+        if (targetIdx === idx) {
+          target.setAttribute("aria-selected", true);
+        } else {
+          tabsBtn.setAttribute("aria-selected", false);
+        }
+      });
+      tabsConts.forEach(function (tabsCont, idx) {
+        if (targetIdx === idx) {
+          tabsCont.style.display = "block";
+        } else {
+          tabsCont.style.display = "none";
+        }
+      });
+    }
+
+    // 좌우 화살표 클릭시 탭 컨텐츠 변경
+    function changeTab(button) {
+      var parent = button.closest(".tab_wrapper");
+      var tabsConts = parent.querySelectorAll(".tab_cont");
+      var currentIndex = Array.from(tabsConts).findIndex(tab => tab.style.display !== "none");
+
+      if (button.classList.contains("tab_prev")) {
+        currentIndex = (currentIndex - 1 + tabsConts.length) % tabsConts.length;
+      } else if (button.classList.contains("tab_next")) {
+        currentIndex = (currentIndex + 1) % tabsConts.length;
+      }
+
+      tabsConts.forEach((tab, idx) => {
+        tab.style.display = idx === currentIndex ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
