@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>타이머 01</title>
-  <style type="text/css">
+  <style>
     .new_evt_wrap {
       position: relative;
       width: 1080px;
@@ -81,10 +81,14 @@
       line-height: 46px;
     }
   </style>
-
+</head>
+<body>
   <div class="new_evt_wrap">
     <div class="event_detail">
-      <img src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20240116-020423-197-CBSBaMh1.png" alt="하단 참조" />
+      <img
+        src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20240116-020423-197-CBSBaMh1.png"
+        alt="하단 참조"
+      />
 
       <div class="date-text">
         <span class="date-emp">할인 혜택 마감</span>
@@ -121,7 +125,7 @@
     }
 
     function counter() {
-      var dday = new Date("Jan 31, 2025, 23:59:59").getTime();
+      var dday = new Date("June 31, 2025, 23:59:59").getTime();
       var timer = setInterval(function () {
         var now = new Date();
         var distance = dday - now;

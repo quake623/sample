@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>타이머 02</title>
   <style>
+    /* 타이머 */
     .timerWrap {
       position: absolute;
       top: 680px;
@@ -37,40 +38,41 @@
     }
   </style>
 </head>
-<body style="margin: 0">
+<body>
   <div style="width: 1080px; margin: 0px auto">
     <div class="event_detail" style="position: relative">
       <img
         src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20240731-023048-498-ciKjft0x.png"
         alt="하단 내용 참조"
       />
+
+      <!-- 남은시간 countdown -->
       <div class="timerWrap">
         <div class="day">
           <span id="d1">0</span>
           <span id="d0">0</span>
           <span class="kr">일</span>
         </div>
-
         <div class="hour">
           <span id="h1">0</span>
           <span id="h0">0</span>
           <span class="kr">시간</span>
         </div>
-
         <div class="min">
           <span id="m1">0</span>
           <span id="m0">0</span>
           <span class="kr">분</span>
         </div>
-
         <div class="sec">
           <span id="s1">0</span>
           <span id="s0">0</span>
           <span class="kr">초</span>
         </div>
       </div>
+      <!-- //남은시간 countdown -->
     </div>
   </div>
+
   <script>
     (function (window) {
       // 카운터
@@ -80,7 +82,7 @@
       }
 
       function counter() {
-        const dday = new Date("March 31, 2025, 23:59:59").getTime();
+        const dday = new Date("June 31, 2025, 23:59:59").getTime();
         const timer = setInterval(function () {
           const now = new Date();
           const distance = dday - now;
@@ -104,21 +106,18 @@
             } else {
               s1 = String(s).split("");
             }
-
             if (m < 10) {
               m1[0] = 0;
               m1[1] = m;
             } else {
               m1 = String(m).split("");
             }
-
             if (h < 10) {
               h1[0] = 0;
               h1[1] = h;
             } else {
               h1 = String(h).split("");
             }
-
             if (d < 10) {
               d1[0] = 0;
               d1[1] = d;
