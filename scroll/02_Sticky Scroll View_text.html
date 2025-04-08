@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Scroll View_text</title>
+  <style>
+    button {
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+      background: transparent;
+    }
+    img {
+      vertical-align: middle;
+    }
+
+
+    .event_detail {
+      position: relative;
+    }
+
+    /* 앵커이동 버튼 */
+    .anchor_container {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      margin-bottom: -8px;
+    }
+    .anchor_wrap {
+      position: relative;
+      display: flex;
+    }
+    .anchor_wrap button {
+      position: relative;
+      width: 100%;
+      height: inherit;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 42px;
+      line-height: 120px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background-color: #2C2D2C;
+    }
+    .anchor_wrap .anchor_btn01::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto 0;
+      width: 1px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .anchor_wrap .anchor_btn03::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto 0;
+      width: 1px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .anchor_wrap button.on {
+      background: #0D9946;
+      color: #fff;
+      box-shadow: 6px 2px 6px 0px rgba(0, 0, 0, 0.35);
+    }
+    .anchor_wrap .anchor_btn01.on::after,
+    .anchor_wrap .anchor_btn03.on::before,
+    .anchor_wrap .anchor_btn01.hide::after,
+    .anchor_wrap .anchor_btn03.hide::before {
+      display: none;
+    }
+  </style>
+</head>
+<body style="margin: 0">
+  <div style="width: 1080px; margin: 0px auto">
+    <div class="event_detail" style="height: 700px; background: #E2FAE9;"></div>
+
+    <!-- 앵커 이동 -->
+    <div class="event_detail anchor_container">
+      <div class="anchor_wrap">
+        <button
+          class="anchor_btn anchor_btn01"
+          data-target="#anchor01"
+          data-img="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250227-103442-487-AodVXHLr.png"
+          onclick="clickTargetHandler(this); return false"
+        >이달의 혜택</button>
+        <button
+          class="anchor_btn anchor_btn02"
+          data-target="#anchor02"
+          data-img="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250227-103447-834-tYju1dbm.png"
+          onclick="clickTargetHandler(this); return false"
+        >베스트 혜택</button>
+        <button
+          class="anchor_btn anchor_btn03"
+          data-target="#anchor03"
+          data-img="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250227-103452-266-tc5MZzQd.png"
+          onclick="clickTargetHandler(this); return false"
+        >주요 이벤트</button>
+      </div>
+    </div>
+
+
+    <!-- 이달의 혜택 -->
+    <div id="anchor01" class="event_detail anchor_cont tab_wrapper">
+      <img
+        src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250227-103007-508-T0djUeor.png"
+        alt="(하단 내용 참조)"
+      />
+    </div>
+
+    <!-- 베스트 혜택 -->
+    <div id="anchor02" class="event_detail anchor_cont">
+      <img
+        src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250227-103012-346-K1R78sP0.jpg"
+        alt="(하단 내용 참조)"
+      />
+    </div>
+
+    <!-- 주요 이벤트 -->
+    <div id="anchor03" class="event_detail anchor_cont">
+      <img
+        src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250227-103016-845-8szKUVaf.jpg"
+        alt="(하단 내용 참조)"
+      />
+    </div>
+
+    <div class="event_detail except">
+      <img
+        src="https://image.lguplus.com/static/pc-contents/images/fcmm/cnts/imge/20250228-031622-686-2ziUtdF4.jpg"
+        alt="(하단 내용 참조)"
+      />
+    </div>
+  </div>
+  <script>
+    ((window) => {
+      function scrollTo(to, duration) {
+        var element = document.scrollingElement || document.documentElement;
+        var start = element.scrollTop;
+        var change = to - start;
+        var startDate = +new Date();
+        // t = current time
+        // b = start value
+        // c = change in value
+        // d = duration
+        var easeInOutQuad = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return (c / 2) * t * t + b;
+          t--;
+          return (-c / 2) * (t * (t - 2) - 1) + b;
+        };
+        var animateScroll = function () {
+          var currentDate = +new Date();
+          var currentTime = currentDate - startDate;
+          element.scrollTop = parseInt(easeInOutQuad(currentTime, start, change, duration));
+          // console.log(currentTime, duration)
+          if (currentTime < duration) {
+            requestAnimationFrame(animateScroll);
+          } else {
+            element.scrollTop = to;
+          }
+        };
+        animateScroll();
+      }
+
+      // Target Handler
+      function clickTargetHandler(e) {
+        if (!e) {
+          return;
+        } else {
+          var target = e.getAttribute("data-target");
+          var reductionHeight = 120;
+          var targetOffsetTop = window.pageYOffset + document.querySelector(target).getBoundingClientRect().top - reductionHeight;
+          scrollTo(targetOffsetTop, 500);
+          console.log("target == ", target);
+          console.log("targetEl == ", document.querySelector(target));
+          document.querySelector(target).focus();
+
+          var newImg = e.getAttribute("data-img");
+          document.getElementById("tabImage").src = newImg;
+        }
+      }
+
+      // 모든 탭에 클릭 이벤트 추가
+      document.querySelectorAll(".anchor_btn").forEach(tab => {
+        tab.addEventListener("click", function () {
+          clickTargetHandler(this);
+        });
+      });
+
+      // 스크롤 위치 저장 변수
+      let lastScrollTop = 0;
+
+      document.addEventListener("scroll", function () {
+        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+
+        var stickyCon = document.querySelector(".anchor_wrap");
+        var stickyConPos = stickyCon.getBoundingClientRect().bottom;
+
+        var anchorBtn01 = document.getElementsByClassName("anchor_btn01")[0];
+        var anchorBtn02 = document.getElementsByClassName("anchor_btn02")[0];
+        var anchorBtn03 = document.getElementsByClassName("anchor_btn03")[0];
+
+        var anchor01El = document.getElementById("anchor01");
+        var anchor02El = document.getElementById("anchor02");
+        var anchor03El = document.getElementById("anchor03");
+
+        var anchor01Pos = anchor01El.getBoundingClientRect().top - 10;
+        var anchor02Pos = anchor02El.getBoundingClientRect().top - 10;
+        var anchor03Pos = anchor03El.getBoundingClientRect().top - 10;
+
+        if (stickyConPos > anchor01Pos && stickyConPos < anchor02Pos) {
+          anchorBtn01.classList.add("on");
+        } else {
+          anchorBtn01.classList.remove("on");
+        }
+        if (stickyConPos > anchor02Pos && stickyConPos < anchor03Pos) {
+          anchorBtn02.classList.add("on");
+        } else {
+          anchorBtn02.classList.remove("on");
+        }
+        if (stickyConPos > anchor03Pos && stickyConPos > anchor02Pos) {
+          anchorBtn03.classList.add("on");
+        } else {
+          anchorBtn03.classList.remove("on");
+        }
+
+        const targetA = document.querySelector(".except");
+        const targetATop = targetA.getBoundingClientRect().top - 120;
+
+        if (targetATop <= 0) {
+          anchorBtn03.classList.remove("on");
+        }
+      });
+
+      // 탭 버튼 활성화시 border
+      const buttons = document.querySelectorAll('.anchor_wrap button');
+      buttons.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+          // 모든 버튼에서 .on 제거
+          buttons.forEach(b => b.classList.remove('on'));
+
+          // 현재 클릭된 버튼에 .on 추가
+          btn.classList.add('on');
+
+          if (index === 1) {
+            document.querySelector('.anchor_btn01')?.classList.add('hide');
+            document.querySelector('.anchor_btn03')?.classList.add('hide');
+          } else {
+            document.querySelector('.anchor_btn01')?.classList.remove('hide');
+            document.querySelector('.anchor_btn03')?.classList.remove('hide');
+          }
+        });
+      });
+    })(window);
+  </script>
+</body>
+</html>
